@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #game td {
+        margin: auto;
+        width: 35px;
+        height: 55px;
+        /* border: 1px solid black; */
+        border-radius: 50%;
+        /* background-image: url(images/牙醫.png); */
+        position: relative;
+      /* background: red; */
+       
+      }
+      body {
+        /* 滑鼠 */
+        cursor: url(./images/fix\ 中.png) 8 8, auto;
+        position: relative;
+        background-image: url(./images/牙醫背景1024.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+      
+        /* 滾輪 */
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        /* background-position: center; */
+      }
+      .black {
+        background: green;
+        width: 100%;
+      }
+      .red {
+        /* background: red; */
+        background: url(./images/蟲蟲-淺色.png);
+        width: 100%;
+        
+      }
+      .blue {
+        background-image: url(./images/蟲蟲死矮.png);
+        width: 100%;
+        /* background: blue; */
+      }
+      /* 主要遊戲畫面 */
+      .tooth {
+        width: 950px;
+        height:715px;
+/* background: red; */
+        background: url(./images/加邊框-1.png) no-repeat center 0;
+        background-size: 85%;
+        margin: auto;
+       
+        display:flex;
+    align-items:center;
+    justify-content:center;
+
+        /* position: absolute; */
+        /* top: 50px;
+        right: 500px; */
+      }
+      /* .box {
+        position: relative;
+        left: 360px;
+        top: 210px; */
+        /* padding: 5px; */
+      /* } */
+
+#box{
+  position: relative;
+  width: 35%;
+height: 25%;
+  /* background: blue; */
+  top: 100px;
+  right: -78px;
+}
+     
+     /* 上排右二 */
+      #hole6,
+      #hole7
+      {
+        position: absolute;
+        right: -10%;
+        top:30px;
+        transform: rotate(180deg);
+      }
+/* 上左1 2 */
+      #hole11
+      ,#hole10 {
+        position: absolute;
+        right: -10%;
+        top: 25px;
+        transform: rotate(180deg);
+        animation: gotop 9s infinite linear;
+      }
+      /* 上 門牙 */
+      #hole8,
+      #hole9 {
+        position: absolute;
+        right: -10%;
+        top:30px;
+        transform: rotate(180deg);
+        width: 50%;
+        animation: gotop 9s infinite linear;
+      }
+      /* 下排左 1 */
+      #hole1 {
+        position: absolute;
+        right: -1%;
+        top: -20px;
+      }
+      /* 下排左 2 */
+      #hole2 {
+        position: absolute;
+        right: -5%;
+        top: 5px;
+        animation: go 7s infinite linear;
+      }
+/* 下排 中間三個 */
+      #hole3,
+      #hole4,
+      #hole5      
+    {
+      position: absolute;
+        right: -10%;
+        top: 10px;
+        animation: go 10s infinite linear;
+      }
+ 
+      /* 1右下 */
+      #hole13 {
+        position: absolute;
+        right: -7%;
+        top: -15px;
+       
+      }
+           /* 鼻孔 */
+           #hole12 {
+            position: absolute;
+        right: 29%;
+        top: -128px;
+        transform: rotate(180deg);
+   
+      }
+ 
+      /* 表單JPG */
+      /* .forms{
+        position: relative;
+        width:350px;
+        height: 500px;
+        background: blue;
+        top: -80%;
+      } */
+      .form {
+        position: absolute;
+        top: 15%;
+        left: 1%;
+       
+      }
+   
+      #text-score {
+        position: absolute;
+        top: 32%;
+        left: 40%;
+        font-size: 50px;
+        transform: rotate(-7deg);
+      }
+      #text-highplayer {
+        position: absolute;
+        top: 54%;
+        right: 15%;
+        font-size: 30px;
+        transform: rotate(-10deg);
+      }
+      #text-highscore {
+        position: absolute;
+        top: 65%;
+        left: 65%;
+        font-size: 35px;
+        transform: rotate(-10deg);
+      }
+
+ 
+/* 開始按鈕 */
+      #btn-start {
+        background-image: url(./images/按鈕go.png);
+        background-size: 100%;
+        
+        background-repeat: no-repeat;
+        height: 150px;
+        width: 150px;
+        border: rgba(167, 148, 148, 0.3);
+        position: absolute;
+        top: -18%;
+        left: -15%;
+      
+      }
+      #buttonBox{
+position: relative;
+background-size: 55%;
+width:115px;
+height: 110px;
+/* background: blue; */
+top: 35%;
+left: 10%;
+      }
+      /* 血條倒數  白色*/
+      #bloodBox{
+width: 100px;
+height: 60%;
+/* background: blue; */
+position: relative;
+top: -70%;
+left: 78%;
+      }
+      #tiktok {
+        width: 424px;
+        height: 25px;
+        background:white ;
+        border: 2px solid rgb(167, 166, 166);
+        margin: 10px auto;
+        border-radius: 10px;
+        position:absolute;
+        right: -160%;
+        top:36%;
+        transform: rotate(90deg);
+       
+      }
+/* 血條裡面的紅色 */
+      #counter {
+        width: 100%;
+        height: 100%;
+        background:rgb(255, 131, 15);
+        float: right;
+      
+      }
+
+
+      #colck{
+background-image:url(./images/時鐘.gif) ;
+width: 830px;
+height: 626px;
+background-size: 25%;
+background-repeat: no-repeat;
+position: absolute;
+left:-55%;
+top: 72%;
+
+      }
+      @keyframes go {
+        0% {
+            transform: translate(30%, 10%) rotateZ(10deg);
+        }
+        50% {
+            transform: translate(-10%, 0%) rotateZ(20deg);
+        }
+        100% {
+            transform: translate(20%, 10%) rotateZ(10deg);
+        }
+    }
+    @keyframes gotop {
+        0% {
+            transform: translate(30%, 10%) rotateZ(-10deg) rotate(-180deg);
+        }
+        50% {
+            transform: translate(-10%, 0%) rotateZ(-20deg) rotate(-180deg);
+        }
+        100% {
+            transform: translate(20%, 10%) rotateZ(-10deg) rotate(-180deg);
+        }
+    }
+    </style>
+  </head>
+
+  <body>
+    <div class="tooth">
+ <div id="box">
+        <table id="game">
+          <tr>
+            <td id="hole11"></td>
+            <td id="hole10"></td>
+            <td id="hole9"></td>
+            <td id="hole8"></td>
+            <td id="hole7"></td>
+            <td id="hole6"></td>
+          </tr>
+
+          <tr>
+            <td id="hole1"></td>
+            <td id="hole2"></td>
+            <td id="hole3"></td>
+            <td id="hole4"></td>
+            <td id="hole5"></td>
+            <td id="hole12"></td>
+            <td id="hole13"></td>
+          </tr>
+        </table>
+      </div>
+      <div id="buttonBox">
+        <div input type="button" onclick="btnStart()" value="開始遊戲" id="btn-start" ></div>
+      </div>
+       
+      </div>
+      
+    </div>
+
+    <div class="form">
+      <img src="./images/表單製作.png" />
+    
+   
+      <p><span id="text-score">0</span></p>
+      <p>
+        <br />
+        <span id="text-highplayer"></span>
+        <br />
+        <span id="text-highscore"></span>
+      </p>
+    </div>
+ 
+
+      <!-- 秒數顯示 -->
+  
+  
+    <!-- 時間血條 -->
+    <div id="bloodBox" >
+    <div id="tiktok">
+      <div id="counter" style="width: 0%"></div>
+      
+    </div>
+    <div id="colck"></div>
+  </div>
+    <script>
+      const btnStart = document.getElementById("btn-start");
+      const holes = document.querySelectorAll("#game td");
+      const textScore = document.getElementById("text-score");
+      const textHighPlayer = document.getElementById("text-highplayer");
+      const textHighScore = document.getElementById("text-highscore");
+
+      const rihai = new Audio();
+      rihai.src = "./rihai.mp3";
+
+      // 分數 倒數時間
+      let score = 0;
+      let isInGame = false;
+      let timer = 0;
+      let timeleft = 15;
+      // 最高的人數 排行榜
+      let highscore = { name: "", score: 0 };
+      let highscoreStorage = JSON.parse(localStorage.getItem("highscore"));
+      if (highscoreStorage !== null) {
+        highscore = highscoreStorage;
+        textHighPlayer.innerText = highscore.name;
+        textHighScore.innerText = highscore.score;
+      }
+      // 倒數計時血條
+      // 計時條長度
+      let counterWidth = 100;
+      let times = 15000;
+      let counterHandle;
+      // let couunterHandle;
+      let complete = 0;
+
+      btnStart.onclick = () => {
+        btnStart.disabled = true;
+
+        score = 0;
+        textScore.innerText = score;
+
+        isInGame = true;
+        // 10秒
+        timer = setInterval(game, 1000);
+        // 30秒
+        setTimeout(end, 15000);
+
+        game();
+
+        counterHandle = setInterval(timeCounter, 125);
+        // 啟動倒數血條
+        
+      };
+      // black 扣分
+      // red 加分
+      const game = () => {
+        for (const hole of holes) {
+          hole.classList.remove("red");
+          hole.classList.remove("black");
+          hole.classList.remove("blue");
+        }
+
+        for (let i = 0; i < 3; i++) {
+          const random = Math.floor(Math.random() * 13);
+          holes[random].classList.add("red");
+        }
+
+        // for (let i = 0; i < 3; i++) {
+        //   const random = Math.floor(Math.random() * 13);
+        //   holes[random].classList.add("black");
+        // }
+      };
+
+      const end = () => {
+        clearInterval(timer);
+
+        for (const hole of holes) {
+          hole.classList.remove("red");
+          hole.classList.remove("blue");
+          hole.classList.remove("black");
+          clearInterval(counterHandle);
+        }
+
+        btnStart.disabled = false;
+        alert(`你的分數是 ${score}`);
+
+        if (highscoreStorage === null || highscore.score < score) {
+          rihai.play();
+
+          const name = prompt("最高分! 請輸入你的名字");
+          highscore.score = score;
+
+          // if(name === null || name.length === 0) {
+          //   highscore.name = '路人'
+          // } else {
+          //   highscore.name = name
+          // }
+          highscore.name = name || "路人";
+
+          localStorage.setItem("highscore", JSON.stringify(highscore));
+          textHighPlayer.innerText = highscore.name;
+          textHighScore.innerText = highscore.score;
+        }
+      };
+
+      for (const hole of holes) {
+        hole.onclick = () => {
+          if (hole.classList.contains("red")) {
+            hole.classList.remove("red");
+            hole.classList.add("blue");
+
+            score++;
+            textScore.innerText = score;
+          }
+          // if (hole.classList.contains("black")) {
+          //   hole.classList.remove("black");
+          //   hole.classList.add("blue");
+
+          //   score--;
+          //   textScore.innerText = score;
+          // }
+          // if (hole.classList.contains("black")) {
+          //   hole.classList.remove("black");
+          //   hole.classList.add("blue");
+
+          //   timer++;
+          //   counterWidth.innerText = timer;
+          // }
+        };
+      }
+
+      
+
+      document.onkeydown = (event) => {
+        const key = event.key;
+        if (!isNaN(key) && isInGame) {
+          const target = document.getElementById(`hole${key}`);
+          if (target && target.classList.contains("red")) {
+            target.classList.remove("red");
+            target.classList.add("blue");
+
+            score++;
+            textScore.innerText = score;
+          }
+        }
+      };
+
+      // 計時器
+      function timeCounter() {
+        if (times < 0) {
+          document.getElementById("counter").style.width = "0%";
+          clearInterval(counterHandle);
+          result(); //計時結束時執行結果判定函式
+        } else {
+          times -= 125;
+          counterWidth -= 0.86;
+          document.getElementById("counter").style.width = counterWidth + "%";
+        }
+      }
+
+
+      // let timer = setInterval(function(){
+      //   // 修改秒數
+      //   timeleft--
+      //   $('#text-time').text(timeleft)
+
+      // }
+
+    </script>
+  </body>
+</html>
